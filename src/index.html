@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NovaMind AI | Build Smarter Products</title>
+    <meta
+      name="description"
+      content="NovaMind AI helps startups ship AI copilots, automation pipelines, and predictive insights faster."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#home">
+        <img src="images/logo.svg" alt="NovaMind AI logo" width="40" height="40" />
+        <span>NovaMind AI</span>
+      </a>
+      <button class="menu-toggle" aria-expanded="false" aria-controls="main-nav">Menu</button>
+      <nav id="main-nav" class="main-nav" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="home">
+      <section class="hero section">
+        <div>
+          <p class="eyebrow">AI Startup Studio</p>
+          <h1>Turn ideas into production-ready AI products</h1>
+          <p>
+            We design, build, and scale custom AI systems for modern teams—without the long enterprise
+            timelines.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Book a demo</a>
+            <a class="btn btn-ghost" href="#products">See products</a>
+          </div>
+        </div>
+        <img src="images/hero-illustration.svg" alt="Abstract AI interface illustration" />
+      </section>
+
+      <section id="services" class="section">
+        <h2>What we build</h2>
+        <div class="grid cards">
+          <article class="card">
+            <h3>AI Copilots</h3>
+            <p>Task assistants for support, sales, and internal operations.</p>
+          </article>
+          <article class="card">
+            <h3>Automation Workflows</h3>
+            <p>Connect your stack and automate repetitive decisions safely.</p>
+          </article>
+          <article class="card">
+            <h3>Predictive Analytics</h3>
+            <p>Forecast growth, churn, and demand using your first-party data.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="products" class="section section-alt">
+        <h2>Featured products</h2>
+        <div class="grid cards">
+          <article class="card product-card">
+            <h3>SignalFlow</h3>
+            <p>Real-time lead scoring engine for B2B growth teams.</p>
+            <span class="tag">SaaS</span>
+          </article>
+          <article class="card product-card">
+            <h3>OpsPilot</h3>
+            <p>Internal AI command center for operations and support agents.</p>
+            <span class="tag">Copilot</span>
+          </article>
+        </div>
+      </section>
+
+      <section id="about" class="section">
+        <h2>About NovaMind</h2>
+        <p>
+          We're a product-first AI startup helping teams go from prototype to production. Our engineers and
+          researchers have shipped systems across fintech, healthtech, and commerce.
+        </p>
+      </section>
+
+      <section id="contact" class="section contact section-alt">
+        <h2>Start your AI project</h2>
+        <form id="contact-form" novalidate>
+          <label>
+            Name
+            <input type="text" name="name" required />
+          </label>
+          <label>
+            Email
+            <input type="email" name="email" required />
+          </label>
+          <label>
+            Project goals
+            <textarea name="message" rows="4" required></textarea>
+          </label>
+          <button class="btn btn-primary" type="submit">Send request</button>
+          <p id="form-feedback" role="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>© <span id="year"></span> NovaMind AI. All rights reserved.</p>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>
