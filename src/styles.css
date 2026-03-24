@@ -57,6 +57,12 @@ a {
   font-weight: 700;
 }
 
+.brand img {
+  width: clamp(180px, 25vw, 300px);
+  height: auto;
+  display: block;
+}
+
 .main-nav {
   display: flex;
   gap: 1.1rem;
