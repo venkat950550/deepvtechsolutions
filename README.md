@@ -1,4 +1,4 @@
-# deepvtech
+# deepVTech
 
 This is a Vite + React + React Router + Tailwind CSS project created from your single-file canvas app.
 
@@ -44,7 +44,7 @@ This project is already prepared for GitHub Pages:
 ### Recommended steps
 
 1. Create a new GitHub repository.
-   Example: `deepvtech`
+   Example: `deepVTech`
 2. Open a terminal in this project folder.
 3. Initialize git and push the code:
 
@@ -53,7 +53,7 @@ git init
 git branch -M main
 git add .
 git commit -m "Initial commit"
-git remote add origin https://github.com/<your-username>/deepvtech.git
+git remote add origin https://github.com/<your-username>/deepVTech.git
 git push -u origin main
 ```
 
@@ -65,10 +65,10 @@ git push -u origin main
 Your site will be published at:
 
 ```text
-https://<your-username>.github.io/deepvtech/
+https://<your-username>.github.io/deepVTech/
 ```
 
-If your repository name is not `deepvtech`, the workflow will still build with the correct asset base automatically.
+If your repository name is not `deepVTech`, the workflow will still build with the correct asset base automatically.
 
 ## Notes
 
