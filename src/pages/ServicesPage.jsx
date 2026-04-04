@@ -79,23 +79,23 @@ export default function ServicesPage() {
           <Reveal>
             <SectionHeading
               eyebrow="Our Services"
-              title="DeepVtech delivers AI services, web and mobile apps, and consulting built around real business needs"
+              title="DeepVTech delivers AI services, web and mobile apps, and consulting built around real business needs"
               copy="We help organizations design, build, and scale software solutions that improve operations, modernize customer experiences, and create practical value from AI."
               align="center"
             />
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-sky-500 via-cyan-500 to-lime-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 transition hover:-translate-y-0.5"
+                className="theme-primary-button inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold"
               >
                 Discuss Your Project
                 <Icon name="arrow-right" className="h-4 w-4" />
               </Link>
               <Link
                 to="/about"
-                className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white/85 px-6 py-3 text-sm font-semibold text-slate-800 transition hover:border-sky-300 hover:bg-white"
+                className="theme-secondary-button inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold"
               >
-                Learn About DeepVtech
+                Learn About DeepVTech
               </Link>
             </div>
           </Reveal>
@@ -103,11 +103,11 @@ export default function ServicesPage() {
           <div className="mx-auto mt-10 grid max-w-6xl gap-6 md:grid-cols-2 xl:grid-cols-4">
             {deliveryPoints.map((point, index) => (
               <Reveal key={point} delay={index * 70}>
-                <div className="h-full rounded-[30px] border border-sky-100 bg-white/90 px-6 py-7 text-center shadow-[0_20px_65px_-44px_rgba(14,165,233,0.28)] backdrop-blur">
-                  <div className="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 via-cyan-500 to-lime-500 text-sm font-semibold text-white">
+                <div className="theme-card h-full rounded-[30px] px-6 py-7 text-center">
+                  <div className="theme-icon-badge mx-auto flex h-10 w-10 items-center justify-center rounded-full text-sm font-semibold">
                     {index + 1}
                   </div>
-                  <p className="mx-auto mt-4 max-w-xs text-sm leading-7 text-slate-700">{point}</p>
+                  <p className="theme-copy mx-auto mt-4 max-w-xs text-sm leading-7">{point}</p>
                 </div>
               </Reveal>
             ))}

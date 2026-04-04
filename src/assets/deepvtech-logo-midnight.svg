@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="140" viewBox="0 0 720 140" role="img" aria-label="DeepVTech Solutions logo">
+  <defs>
+    <linearGradient id="shell" x1="18" y1="10" x2="112" y2="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="52%" stop-color="#818CF8" />
+      <stop offset="100%" stop-color="#22D3EE" />
+    </linearGradient>
+    <linearGradient id="accent" x1="50" y1="30" x2="96" y2="82" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="52%" stop-color="#818CF8" />
+      <stop offset="100%" stop-color="#22D3EE" />
+    </linearGradient>
+    <linearGradient id="word" x1="0" y1="0" x2="420" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="52%" stop-color="#818CF8" />
+      <stop offset="100%" stop-color="#22D3EE" />
+    </linearGradient>
+  </defs>
+  <g transform="translate(18 10)">
+    <path d="M18 10H54C89 10 114 31 114 60C114 89 89 110 54 110H18V10Z" fill="url(#shell)" />
+    <path d="M35 27H51C73 27 89 41 89 60C89 79 73 93 51 93H35V27Z" fill="#0B1426" fill-opacity="0.97" />
+    <path d="M53 31L69 76C70.2 79.4 75 79.4 76.2 76L96 31H83.5L72.6 58.8L63 31H53Z" fill="url(#accent)" />
+    <path d="M26 20H54C75 20 97 34 102 52" fill="none" stroke="#ffffff" stroke-opacity="0.18" stroke-width="3.5" stroke-linecap="round" />
+  </g>
+  <g transform="translate(166 18)">
+    <text x="210" y="54" text-anchor="middle" fill="#F8FAFC" font-family="'Segoe UI', Arial, sans-serif" font-size="60" font-weight="800" letter-spacing="1.5">
+      <tspan fill="#F8FAFC">DEEP</tspan><tspan fill="url(#word)">VTECH</tspan>
+    </text>
+    <text x="210" y="92" text-anchor="middle" fill="#93C5FD" font-family="'Segoe UI', Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="8">SOLUTIONS</text>
+    <rect x="168" y="104" width="84" height="3" rx="1.5" fill="url(#word)" opacity="0.82" />
+  </g>
+</svg>

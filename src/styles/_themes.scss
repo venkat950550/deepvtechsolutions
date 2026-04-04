@@ -1,0 +1,424 @@
+@use 'sass:map';
+
+$themes: (
+  aurora: (
+    color-scheme: light,
+    page-bg: linear-gradient(180deg, #ffffff 0%, #f8fcff 45%, #f7fee7 100%),
+    section-bg: linear-gradient(180deg, #f8fbff 0%, #f4fbff 54%, #fbfff5 100%),
+    section-bg-subtle: linear-gradient(180deg, #ffffff 0%, #fbfdff 58%, #f9fdf3 100%),
+    hero-bg: linear-gradient(180deg, #f7fbff 0%, #f2fbff 55%, #fbfff5 100%),
+    footer-bg: linear-gradient(135deg, #ffffff 0%, #f0f9ff 58%, #f7fee7 100%),
+    surface-header: rgba(255, 255, 255, 0.8),
+    surface-card: rgba(255, 255, 255, 0.92),
+    surface-glass: rgba(255, 255, 255, 0.76),
+    surface-muted: rgba(248, 250, 252, 0.84),
+    surface-chip: rgba(239, 249, 255, 0.85),
+    surface-chip-strong: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(240, 249, 255, 0.86)),
+    surface-input: rgba(248, 250, 252, 0.92),
+    text-base: #0f172a,
+    text-strong: #020617,
+    text-muted: #475569,
+    text-soft: #64748b,
+    text-inverse: #f8fafc,
+    border-rgb: 148 163 184,
+    border-accent-rgb: 125 211 252,
+    shadow-rgb: 14 165 233,
+    tone-1-rgb: 14 165 233,
+    tone-2-rgb: 6 182 212,
+    tone-3-rgb: 132 204 22,
+    accent-gradient: linear-gradient(135deg, rgb(14 165 233), rgb(6 182 212) 55%, rgb(132 204 22)),
+    accent-gradient-soft: linear-gradient(135deg, rgba(14, 165, 233, 0.12), rgba(6, 182, 212, 0.1) 55%, rgba(132, 204, 22, 0.14)),
+    hero-overlay: 'radial-gradient(circle at 16% 18%, rgba(14, 165, 233, 0.05), transparent 18%), radial-gradient(circle at 82% 22%, rgba(6, 182, 212, 0.05), transparent 16%), radial-gradient(circle at 76% 82%, rgba(132, 204, 22, 0.04), transparent 16%)',
+    hero-grid-major: rgba(14, 165, 233, 0.07),
+    hero-grid-minor: rgba(14, 165, 233, 0.05),
+    hero-line-1: rgb(14 165 233 / 0.18),
+    hero-line-2: rgb(6 182 212 / 0.18),
+    hero-line-3: rgb(132 204 22 / 0.16),
+    hero-line-4: rgb(14 165 233 / 0.12),
+    hero-spot-1: rgb(125 211 252 / 0.16),
+    hero-spot-2: rgb(103 232 249 / 0.14),
+    hero-spot-3: rgb(190 242 100 / 0.14),
+    section-overlay: 'radial-gradient(circle at 16% 18%, rgba(14, 165, 233, 0.08), transparent 24%), radial-gradient(circle at 84% 20%, rgba(34, 211, 238, 0.07), transparent 22%), radial-gradient(circle at 76% 84%, rgba(132, 204, 22, 0.06), transparent 24%)',
+    section-overlay-subtle: 'radial-gradient(circle at 18% 16%, rgba(14, 165, 233, 0.05), transparent 26%), radial-gradient(circle at 82% 84%, rgba(132, 204, 22, 0.05), transparent 22%)'
+  ),
+  prism: (
+    color-scheme: light,
+    page-bg: linear-gradient(180deg, #fbfdff 0%, #eef6ff 24%, #edfaff 52%, #f1fbf7 78%, #fff6eb 100%),
+    section-bg: linear-gradient(135deg, #f8fbff 0%, #edf6ff 34%, #edfaff 60%, #f1fbf8 78%, #fff7ef 100%),
+    section-bg-subtle: linear-gradient(180deg, #ffffff 0%, #f4f9ff 48%, #effcfb 72%, #fff9f1 100%),
+    hero-bg: linear-gradient(145deg, #f7fbff 0%, #ebf4ff 28%, #eafaff 56%, #eefbf7 78%, #fff5ea 100%),
+    footer-bg: linear-gradient(135deg, #edf6ff 0%, #e6f3ff 28%, #e9fbff 54%, #eef9f6 76%, #fff1e2 100%),
+    surface-header: rgba(255, 255, 255, 0.82),
+    surface-card: rgba(255, 255, 255, 0.93),
+    surface-glass: rgba(255, 255, 255, 0.78),
+    surface-muted: rgba(245, 247, 255, 0.9),
+    surface-chip: rgba(239, 246, 255, 0.88),
+    surface-chip-strong: linear-gradient(135deg, rgba(255, 255, 255, 0.96) 0%, rgba(238, 246, 255, 0.94) 34%, rgba(238, 251, 255, 0.95) 62%, rgba(255, 246, 236, 0.94) 100%),
+    surface-input: rgba(248, 250, 255, 0.96),
+    text-base: #18305f,
+    text-strong: #001a82,
+    text-muted: #4e5f8a,
+    text-soft: #6d7ca4,
+    text-inverse: #f8fafc,
+    border-rgb: 98 132 188,
+    border-accent-rgb: 0 132 209,
+    shadow-rgb: 0 26 130,
+    tone-1-rgb: 0 132 209,
+    tone-2-rgb: 0 184 217,
+    tone-3-rgb: 255 127 10,
+    accent-gradient: linear-gradient(120deg, rgb(0 26 130) 0%, rgb(0 132 209) 24%, rgb(0 184 217) 50%, rgb(0 142 113) 76%, rgb(255 127 10) 100%),
+    accent-gradient-soft: linear-gradient(120deg, rgba(0, 26, 130, 0.14) 0%, rgba(0, 132, 209, 0.12) 28%, rgba(0, 184, 217, 0.11) 54%, rgba(0, 142, 113, 0.1) 78%, rgba(255, 127, 10, 0.14) 100%),
+    hero-overlay: 'radial-gradient(circle at 16% 18%, rgba(0, 132, 209, 0.08), transparent 20%), radial-gradient(circle at 54% 20%, rgba(0, 184, 217, 0.08), transparent 20%), radial-gradient(circle at 80% 24%, rgba(0, 142, 113, 0.07), transparent 18%), radial-gradient(circle at 78% 82%, rgba(255, 127, 10, 0.08), transparent 18%)',
+    hero-grid-major: rgba(0, 132, 209, 0.08),
+    hero-grid-minor: rgba(0, 132, 209, 0.05),
+    hero-line-1: rgb(0 26 130 / 0.18),
+    hero-line-2: rgb(0 132 209 / 0.2),
+    hero-line-3: rgb(0 184 217 / 0.18),
+    hero-line-4: rgb(255 127 10 / 0.16),
+    hero-spot-1: rgb(0 184 217 / 0.18),
+    hero-spot-2: rgb(0 142 113 / 0.16),
+    hero-spot-3: rgb(255 127 10 / 0.14),
+    section-overlay: 'radial-gradient(circle at 16% 18%, rgba(0, 132, 209, 0.09), transparent 24%), radial-gradient(circle at 58% 18%, rgba(0, 184, 217, 0.08), transparent 22%), radial-gradient(circle at 82% 24%, rgba(0, 142, 113, 0.07), transparent 22%), radial-gradient(circle at 72% 80%, rgba(255, 127, 10, 0.08), transparent 24%)',
+    section-overlay-subtle: 'radial-gradient(circle at 18% 16%, rgba(0, 132, 209, 0.05), transparent 26%), radial-gradient(circle at 76% 78%, rgba(0, 184, 217, 0.05), transparent 22%), radial-gradient(circle at 84% 86%, rgba(255, 127, 10, 0.05), transparent 20%)'
+  ),
+  vertex: (
+    color-scheme: light,
+    page-bg: linear-gradient(180deg, #f7faff 0%, #f5f9ff 48%, #fcfdff 100%),
+    section-bg: linear-gradient(180deg, #f8fbff 0%, #f3f8ff 56%, #fafcff 100%),
+    section-bg-subtle: linear-gradient(180deg, #ffffff 0%, #f8fbff 60%, #fbfdff 100%),
+    hero-bg: linear-gradient(135deg, #f7faff 0%, #eef6ff 42%, #f8f4ff 74%, #fff9f3 100%),
+    footer-bg: linear-gradient(135deg, #f2f7ff 0%, #edf5ff 46%, #f6f3ff 78%, #fff7ef 100%),
+    surface-header: rgba(255, 255, 255, 0.82),
+    surface-card: rgba(255, 255, 255, 0.95),
+    surface-glass: rgba(255, 255, 255, 0.8),
+    surface-muted: rgba(247, 250, 255, 0.94),
+    surface-chip: rgba(240, 246, 255, 0.9),
+    surface-chip-strong: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(242, 247, 255, 0.96) 52%, rgba(247, 242, 255, 0.96) 100%),
+    surface-input: rgba(255, 255, 255, 0.98),
+    text-base: #334155,
+    text-strong: #0a1633,
+    text-muted: #64748b,
+    text-soft: #7c8ca3,
+    text-inverse: #f4f8ff,
+    border-rgb: 217 228 242,
+    border-accent-rgb: 6 194 249,
+    shadow-rgb: 13 48 166,
+    tone-1-rgb: 2 110 206,
+    tone-2-rgb: 173 15 189,
+    tone-3-rgb: 249 92 21,
+    accent-gradient: linear-gradient(135deg, rgb(6 194 249) 0%, rgb(2 110 206) 45%, rgb(173 15 189) 100%),
+    accent-gradient-soft: linear-gradient(135deg, rgba(6, 194, 249, 0.14) 0%, rgba(2, 110, 206, 0.12) 46%, rgba(173, 15, 189, 0.1) 100%),
+    hero-overlay: 'radial-gradient(circle at 18% 18%, rgba(6, 194, 249, 0.08), transparent 20%), radial-gradient(circle at 78% 20%, rgba(173, 15, 189, 0.07), transparent 18%), radial-gradient(circle at 76% 82%, rgba(249, 92, 21, 0.08), transparent 18%), radial-gradient(circle at 24% 86%, rgba(254, 172, 10, 0.06), transparent 16%)',
+    hero-grid-major: rgba(2, 110, 206, 0.08),
+    hero-grid-minor: rgba(2, 110, 206, 0.05),
+    hero-line-1: rgb(6 194 249 / 0.18),
+    hero-line-2: rgb(2 110 206 / 0.2),
+    hero-line-3: rgb(173 15 189 / 0.16),
+    hero-line-4: rgb(249 92 21 / 0.16),
+    hero-spot-1: rgb(6 194 249 / 0.18),
+    hero-spot-2: rgb(173 15 189 / 0.14),
+    hero-spot-3: rgb(254 172 10 / 0.14),
+    section-overlay: 'radial-gradient(circle at 16% 18%, rgba(6, 194, 249, 0.08), transparent 24%), radial-gradient(circle at 84% 22%, rgba(173, 15, 189, 0.07), transparent 22%), radial-gradient(circle at 74% 80%, rgba(249, 92, 21, 0.07), transparent 24%)',
+    section-overlay-subtle: 'radial-gradient(circle at 18% 16%, rgba(2, 110, 206, 0.05), transparent 24%), radial-gradient(circle at 82% 84%, rgba(254, 172, 10, 0.05), transparent 20%)'
+  ),
+  neon: (
+    color-scheme: dark,
+    page-bg: linear-gradient(180deg, #010208 0%, #040726 38%, #09041d 72%, #13060b 100%),
+    section-bg: linear-gradient(180deg, #050816 0%, #07102e 52%, #100624 100%),
+    section-bg-subtle: linear-gradient(180deg, #070a1d 0%, #0a1233 58%, #12082a 100%),
+    hero-bg: linear-gradient(135deg, #010208 0%, #071138 32%, #050042 55%, #1a0630 76%, #231006 100%),
+    footer-bg: linear-gradient(135deg, #040715 0%, #071434 38%, #10072a 72%, #1b0f09 100%),
+    surface-header: rgba(6, 9, 28, 0.84),
+    surface-card: rgba(10, 14, 40, 0.92),
+    surface-glass: rgba(8, 12, 35, 0.78),
+    surface-muted: rgba(14, 19, 48, 0.9),
+    surface-chip: rgba(9, 18, 48, 0.9),
+    surface-chip-strong: linear-gradient(135deg, rgba(8, 13, 36, 0.96) 0%, rgba(7, 24, 70, 0.92) 36%, rgba(24, 8, 63, 0.92) 70%, rgba(31, 17, 8, 0.9) 100%),
+    surface-input: rgba(11, 17, 42, 0.94),
+    text-base: #d8e6ff,
+    text-strong: #f9fbff,
+    text-muted: #a3b4d7,
+    text-soft: #7f95c1,
+    text-inverse: #f8fbff,
+    border-rgb: 34 56 118,
+    border-accent-rgb: 10 214 255,
+    shadow-rgb: 10 214 255,
+    tone-1-rgb: 10 214 255,
+    tone-2-rgb: 193 0 179,
+    tone-3-rgb: 255 176 9,
+    accent-gradient: linear-gradient(135deg, rgb(10 214 255) 0%, rgb(111 0 147) 48%, rgb(255 176 9) 100%),
+    accent-gradient-soft: linear-gradient(135deg, rgba(10, 214, 255, 0.2) 0%, rgba(111, 0, 147, 0.18) 48%, rgba(255, 176, 9, 0.18) 100%),
+    hero-overlay: 'radial-gradient(circle at 18% 18%, rgba(10, 214, 255, 0.24), transparent 22%), radial-gradient(circle at 52% 18%, rgba(0, 106, 205, 0.18), transparent 18%), radial-gradient(circle at 78% 22%, rgba(255, 176, 9, 0.24), transparent 20%), radial-gradient(circle at 68% 80%, rgba(193, 0, 179, 0.22), transparent 22%), radial-gradient(circle at 20% 78%, rgba(111, 0, 147, 0.18), transparent 18%)',
+    hero-grid-major: rgba(10, 214, 255, 0.12),
+    hero-grid-minor: rgba(10, 214, 255, 0.08),
+    hero-line-1: rgb(10 214 255 / 0.26),
+    hero-line-2: rgb(0 106 205 / 0.24),
+    hero-line-3: rgb(193 0 179 / 0.22),
+    hero-line-4: rgb(255 176 9 / 0.18),
+    hero-spot-1: rgb(10 214 255 / 0.24),
+    hero-spot-2: rgb(193 0 179 / 0.2),
+    hero-spot-3: rgb(255 176 9 / 0.2),
+    section-overlay: 'radial-gradient(circle at 16% 18%, rgba(10, 214, 255, 0.18), transparent 24%), radial-gradient(circle at 50% 18%, rgba(0, 106, 205, 0.12), transparent 18%), radial-gradient(circle at 84% 24%, rgba(255, 176, 9, 0.18), transparent 22%), radial-gradient(circle at 76% 82%, rgba(193, 0, 179, 0.16), transparent 24%)',
+    section-overlay-subtle: 'radial-gradient(circle at 18% 16%, rgba(10, 214, 255, 0.1), transparent 24%), radial-gradient(circle at 78% 82%, rgba(193, 0, 179, 0.1), transparent 20%), radial-gradient(circle at 86% 88%, rgba(255, 176, 9, 0.08), transparent 18%)'
+  ),
+  reactor: (
+    color-scheme: dark,
+    page-bg: linear-gradient(180deg, #16181d 0%, #191d24 34%, #23272f 100%),
+    section-bg: linear-gradient(180deg, #16181d 0%, #1c2028 54%, #23272f 100%),
+    section-bg-subtle: linear-gradient(180deg, #181b22 0%, #20242d 58%, #2b303b 100%),
+    hero-bg: linear-gradient(135deg, #16181d 0%, #1a1f27 32%, #1b242f 68%, #16181d 100%),
+    footer-bg: linear-gradient(135deg, #171a20 0%, #1d2129 48%, #23272f 100%),
+    surface-header: rgba(22, 24, 29, 0.82),
+    surface-card: rgba(52, 58, 70, 0.82),
+    surface-glass: rgba(35, 39, 47, 0.78),
+    surface-muted: rgba(43, 48, 59, 0.9),
+    surface-chip: rgba(52, 58, 70, 0.88),
+    surface-chip-strong: linear-gradient(135deg, rgba(52, 58, 70, 0.96) 0%, rgba(64, 71, 86, 0.92) 58%, rgba(35, 39, 47, 0.94) 100%),
+    surface-input: rgba(43, 48, 59, 0.94),
+    text-base: #ebecef,
+    text-strong: #f6f7f9,
+    text-muted: #99a1b3,
+    text-soft: #78839b,
+    text-inverse: #f6f7f9,
+    border-rgb: 52 58 70,
+    border-accent-rgb: 88 196 220,
+    shadow-rgb: 0 0 0,
+    tone-1-rgb: 88 196 220,
+    tone-2-rgb: 20 158 202,
+    tone-3-rgb: 107 117 219,
+    accent-gradient: linear-gradient(135deg, rgb(8 126 164) 0%, rgb(20 158 202) 56%, rgb(107 117 219) 100%),
+    accent-gradient-soft: linear-gradient(135deg, rgba(88, 196, 220, 0.14) 0%, rgba(20, 158, 202, 0.12) 58%, rgba(107, 117, 219, 0.12) 100%),
+    hero-overlay: 'radial-gradient(circle at 18% 18%, rgba(88, 196, 220, 0.14), transparent 20%), radial-gradient(circle at 76% 20%, rgba(107, 117, 219, 0.12), transparent 18%), radial-gradient(circle at 72% 82%, rgba(68, 172, 153, 0.1), transparent 18%)',
+    hero-grid-major: rgba(88, 196, 220, 0.09),
+    hero-grid-minor: rgba(88, 196, 220, 0.05),
+    hero-line-1: rgb(88 196 220 / 0.22),
+    hero-line-2: rgb(20 158 202 / 0.2),
+    hero-line-3: rgb(107 117 219 / 0.18),
+    hero-line-4: rgb(68 172 153 / 0.16),
+    hero-spot-1: rgb(88 196 220 / 0.14),
+    hero-spot-2: rgb(107 117 219 / 0.12),
+    hero-spot-3: rgb(68 172 153 / 0.1),
+    section-overlay: 'radial-gradient(circle at 16% 18%, rgba(88, 196, 220, 0.11), transparent 24%), radial-gradient(circle at 84% 20%, rgba(107, 117, 219, 0.1), transparent 22%), radial-gradient(circle at 76% 84%, rgba(68, 172, 153, 0.08), transparent 24%)',
+    section-overlay-subtle: 'radial-gradient(circle at 18% 16%, rgba(88, 196, 220, 0.06), transparent 24%), radial-gradient(circle at 82% 84%, rgba(107, 117, 219, 0.06), transparent 22%)'
+  ),
+  links: (
+    color-scheme: light,
+    page-bg: linear-gradient(180deg, #ffffff 0%, #f8fbfd 48%, #f3f8fb 100%),
+    section-bg: linear-gradient(180deg, #ffffff 0%, #f9fcfe 60%, #f5fafe 100%),
+    section-bg-subtle: linear-gradient(180deg, #fbfdfe 0%, #f4f9fc 58%, #f1f7fb 100%),
+    hero-bg: linear-gradient(180deg, #1f475b 0%, #1b4356 46%, #183d4f 100%),
+    footer-bg: linear-gradient(135deg, #1d4457 0%, #1a3f51 58%, #16394a 100%),
+    surface-header: rgba(255, 255, 255, 0.92),
+    surface-card: rgba(255, 255, 255, 0.97),
+    surface-glass: rgba(255, 255, 255, 0.84),
+    surface-muted: rgba(245, 249, 252, 0.94),
+    surface-chip: rgba(230, 245, 250, 0.9),
+    surface-chip-strong: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 249, 252, 0.94) 100%),
+    surface-input: rgba(251, 253, 254, 0.98),
+    text-base: #36505f,
+    text-strong: #183345,
+    text-muted: #5e7887,
+    text-soft: #7b93a0,
+    text-inverse: #f8fafc,
+    border-rgb: 204 223 232,
+    border-accent-rgb: 54 188 234,
+    shadow-rgb: 18 54 69,
+    tone-1-rgb: 54 188 234,
+    tone-2-rgb: 21 155 198,
+    tone-3-rgb: 12 116 153,
+    accent-gradient: linear-gradient(135deg, rgb(54 188 234) 0%, rgb(21 155 198) 58%, rgb(12 116 153) 100%),
+    accent-gradient-soft: linear-gradient(135deg, rgba(54, 188, 234, 0.16) 0%, rgba(21, 155, 198, 0.12) 58%, rgba(12, 116, 153, 0.1) 100%),
+    hero-overlay: 'radial-gradient(circle at 14% 16%, rgba(54, 188, 234, 0.22), transparent 18%), radial-gradient(circle at 30% 34%, rgba(54, 188, 234, 0.14), transparent 12%), radial-gradient(circle at 50% 30%, rgba(54, 188, 234, 0.12), transparent 10%), radial-gradient(circle at 76% 26%, rgba(54, 188, 234, 0.18), transparent 14%), radial-gradient(circle at 72% 74%, rgba(54, 188, 234, 0.14), transparent 14%), radial-gradient(circle at 22% 78%, rgba(54, 188, 234, 0.12), transparent 12%)',
+    hero-grid-major: rgba(54, 188, 234, 0.08),
+    hero-grid-minor: rgba(54, 188, 234, 0.04),
+    hero-line-1: rgb(54 188 234 / 0.18),
+    hero-line-2: rgb(54 188 234 / 0.15),
+    hero-line-3: rgb(21 155 198 / 0.14),
+    hero-line-4: rgb(12 116 153 / 0.12),
+    hero-spot-1: rgb(54 188 234 / 0.22),
+    hero-spot-2: rgb(54 188 234 / 0.14),
+    hero-spot-3: rgb(21 155 198 / 0.12),
+    section-overlay: 'radial-gradient(circle at 16% 18%, rgba(54, 188, 234, 0.08), transparent 24%), radial-gradient(circle at 82% 20%, rgba(21, 155, 198, 0.06), transparent 22%), radial-gradient(circle at 76% 84%, rgba(12, 116, 153, 0.05), transparent 24%)',
+    section-overlay-subtle: 'radial-gradient(circle at 18% 16%, rgba(54, 188, 234, 0.05), transparent 24%), radial-gradient(circle at 82% 84%, rgba(12, 116, 153, 0.04), transparent 22%)'
+  ),
+  ember: (
+    color-scheme: light,
+    page-bg: linear-gradient(180deg, #fff9f5 0%, #fff4ef 44%, #fff9ec 100%),
+    section-bg: linear-gradient(180deg, #fff8f2 0%, #fff2ed 56%, #fff8ef 100%),
+    section-bg-subtle: linear-gradient(180deg, #fffdfb 0%, #fff7f2 58%, #fffaf1 100%),
+    hero-bg: linear-gradient(180deg, #fff9f4 0%, #fff2ea 54%, #fff8ee 100%),
+    footer-bg: linear-gradient(135deg, #fffdfb 0%, #fff4ef 58%, #fff9ed 100%),
+    surface-header: rgba(255, 251, 248, 0.86),
+    surface-card: rgba(255, 252, 250, 0.94),
+    surface-glass: rgba(255, 250, 247, 0.82),
+    surface-muted: rgba(255, 246, 239, 0.9),
+    surface-chip: rgba(255, 239, 230, 0.88),
+    surface-chip-strong: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 242, 235, 0.92)),
+    surface-input: rgba(255, 247, 242, 0.96),
+    text-base: #2a1711,
+    text-strong: #1b0c08,
+    text-muted: #70473a,
+    text-soft: #8a5a4d,
+    text-inverse: #fff7f2,
+    border-rgb: 191 116 87,
+    border-accent-rgb: 251 146 60,
+    shadow-rgb: 234 88 12,
+    tone-1-rgb: 249 115 22,
+    tone-2-rgb: 244 63 94,
+    tone-3-rgb: 245 158 11,
+    accent-gradient: linear-gradient(135deg, rgb(249 115 22), rgb(244 63 94) 55%, rgb(245 158 11)),
+    accent-gradient-soft: linear-gradient(135deg, rgba(249, 115, 22, 0.14), rgba(244, 63, 94, 0.1) 55%, rgba(245, 158, 11, 0.14)),
+    hero-overlay: 'radial-gradient(circle at 16% 18%, rgba(249, 115, 22, 0.07), transparent 18%), radial-gradient(circle at 82% 22%, rgba(244, 63, 94, 0.06), transparent 16%), radial-gradient(circle at 76% 82%, rgba(245, 158, 11, 0.06), transparent 16%)',
+    hero-grid-major: rgba(249, 115, 22, 0.07),
+    hero-grid-minor: rgba(249, 115, 22, 0.05),
+    hero-line-1: rgb(249 115 22 / 0.18),
+    hero-line-2: rgb(244 63 94 / 0.18),
+    hero-line-3: rgb(245 158 11 / 0.18),
+    hero-line-4: rgb(251 146 60 / 0.12),
+    hero-spot-1: rgb(253 186 116 / 0.18),
+    hero-spot-2: rgb(251 113 133 / 0.16),
+    hero-spot-3: rgb(252 211 77 / 0.16),
+    section-overlay: 'radial-gradient(circle at 16% 18%, rgba(249, 115, 22, 0.08), transparent 24%), radial-gradient(circle at 84% 20%, rgba(244, 63, 94, 0.07), transparent 22%), radial-gradient(circle at 76% 84%, rgba(245, 158, 11, 0.07), transparent 24%)',
+    section-overlay-subtle: 'radial-gradient(circle at 18% 16%, rgba(249, 115, 22, 0.05), transparent 26%), radial-gradient(circle at 82% 84%, rgba(245, 158, 11, 0.05), transparent 22%)'
+  ),
+  midnight: (
+    color-scheme: dark,
+    page-bg: linear-gradient(180deg, #04111f 0%, #081a2d 45%, #0f172a 100%),
+    section-bg: linear-gradient(180deg, #081423 0%, #0a1b2f 54%, #10192c 100%),
+    section-bg-subtle: linear-gradient(180deg, #091423 0%, #0c1729 58%, #111d31 100%),
+    hero-bg: linear-gradient(180deg, #07111f 0%, #0a1a31 55%, #111a31 100%),
+    footer-bg: linear-gradient(135deg, #081423 0%, #0a1c31 58%, #101c33 100%),
+    surface-header: rgba(4, 17, 31, 0.82),
+    surface-card: rgba(8, 20, 35, 0.9),
+    surface-glass: rgba(10, 24, 43, 0.76),
+    surface-muted: rgba(15, 23, 42, 0.88),
+    surface-chip: rgba(15, 23, 42, 0.9),
+    surface-chip-strong: linear-gradient(135deg, rgba(15, 23, 42, 0.94), rgba(8, 20, 35, 0.92)),
+    surface-input: rgba(15, 23, 42, 0.92),
+    text-base: #dbeafe,
+    text-strong: #f8fafc,
+    text-muted: #bfdbfe,
+    text-soft: #93c5fd,
+    text-inverse: #f8fafc,
+    border-rgb: 96 165 250,
+    border-accent-rgb: 56 189 248,
+    shadow-rgb: 59 130 246,
+    tone-1-rgb: 56 189 248,
+    tone-2-rgb: 129 140 248,
+    tone-3-rgb: 34 211 238,
+    accent-gradient: linear-gradient(135deg, rgb(56 189 248), rgb(129 140 248) 55%, rgb(34 211 238)),
+    accent-gradient-soft: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(129, 140, 248, 0.18) 55%, rgba(34, 211, 238, 0.18)),
+    hero-overlay: 'radial-gradient(circle at 16% 18%, rgba(56, 189, 248, 0.14), transparent 18%), radial-gradient(circle at 82% 22%, rgba(129, 140, 248, 0.14), transparent 16%), radial-gradient(circle at 76% 82%, rgba(34, 211, 238, 0.12), transparent 16%)',
+    hero-grid-major: rgba(56, 189, 248, 0.12),
+    hero-grid-minor: rgba(56, 189, 248, 0.08),
+    hero-line-1: rgb(56 189 248 / 0.28),
+    hero-line-2: rgb(129 140 248 / 0.28),
+    hero-line-3: rgb(34 211 238 / 0.24),
+    hero-line-4: rgb(96 165 250 / 0.18),
+    hero-spot-1: rgb(56 189 248 / 0.18),
+    hero-spot-2: rgb(129 140 248 / 0.18),
+    hero-spot-3: rgb(34 211 238 / 0.18),
+    section-overlay: 'radial-gradient(circle at 16% 18%, rgba(56, 189, 248, 0.13), transparent 24%), radial-gradient(circle at 84% 20%, rgba(129, 140, 248, 0.12), transparent 22%), radial-gradient(circle at 76% 84%, rgba(34, 211, 238, 0.12), transparent 24%)',
+    section-overlay-subtle: 'radial-gradient(circle at 18% 16%, rgba(56, 189, 248, 0.08), transparent 26%), radial-gradient(circle at 82% 84%, rgba(34, 211, 238, 0.08), transparent 22%)'
+  )
+);
+
+@mixin emit-theme($theme) {
+  color-scheme: map.get($theme, color-scheme);
+  --page-bg: #{map.get($theme, page-bg)};
+  --section-bg: #{map.get($theme, section-bg)};
+  --section-bg-subtle: #{map.get($theme, section-bg-subtle)};
+  --hero-bg: #{map.get($theme, hero-bg)};
+  --footer-bg: #{map.get($theme, footer-bg)};
+  --surface-header: #{map.get($theme, surface-header)};
+  --surface-card: #{map.get($theme, surface-card)};
+  --surface-glass: #{map.get($theme, surface-glass)};
+  --surface-muted: #{map.get($theme, surface-muted)};
+  --surface-chip: #{map.get($theme, surface-chip)};
+  --surface-chip-strong: #{map.get($theme, surface-chip-strong)};
+  --surface-input: #{map.get($theme, surface-input)};
+  --text-base: #{map.get($theme, text-base)};
+  --text-strong: #{map.get($theme, text-strong)};
+  --text-muted: #{map.get($theme, text-muted)};
+  --text-soft: #{map.get($theme, text-soft)};
+  --text-inverse: #{map.get($theme, text-inverse)};
+  --border-rgb: #{map.get($theme, border-rgb)};
+  --border-accent-rgb: #{map.get($theme, border-accent-rgb)};
+  --shadow-rgb: #{map.get($theme, shadow-rgb)};
+  --tone-1-rgb: #{map.get($theme, tone-1-rgb)};
+  --tone-2-rgb: #{map.get($theme, tone-2-rgb)};
+  --tone-3-rgb: #{map.get($theme, tone-3-rgb)};
+  --accent-gradient: #{map.get($theme, accent-gradient)};
+  --accent-gradient-soft: #{map.get($theme, accent-gradient-soft)};
+  --hero-overlay: #{map.get($theme, hero-overlay)};
+  --hero-grid-major: #{map.get($theme, hero-grid-major)};
+  --hero-grid-minor: #{map.get($theme, hero-grid-minor)};
+  --hero-line-1: #{map.get($theme, hero-line-1)};
+  --hero-line-2: #{map.get($theme, hero-line-2)};
+  --hero-line-3: #{map.get($theme, hero-line-3)};
+  --hero-line-4: #{map.get($theme, hero-line-4)};
+  --hero-spot-1: #{map.get($theme, hero-spot-1)};
+  --hero-spot-2: #{map.get($theme, hero-spot-2)};
+  --hero-spot-3: #{map.get($theme, hero-spot-3)};
+  --section-overlay: #{map.get($theme, section-overlay)};
+  --section-overlay-subtle: #{map.get($theme, section-overlay-subtle)};
+}
+
+:root,
+html[data-theme='aurora'] {
+  @include emit-theme(map.get($themes, aurora));
+}
+
+html[data-theme='ember'] {
+  @include emit-theme(map.get($themes, ember));
+}
+
+html[data-theme='prism'] {
+  @include emit-theme(map.get($themes, prism));
+}
+
+html[data-theme='vertex'] {
+  @include emit-theme(map.get($themes, vertex));
+}
+
+html[data-theme='neon'] {
+  @include emit-theme(map.get($themes, neon));
+}
+
+html[data-theme='reactor'] {
+  @include emit-theme(map.get($themes, reactor));
+}
+
+html[data-theme='links'] {
+  @include emit-theme(map.get($themes, links));
+}
+
+html[data-theme='midnight'] {
+  @include emit-theme(map.get($themes, midnight));
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--page-bg);
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--page-bg);
+  color: var(--text-base);
+  transition: background 0.35s ease, color 0.25s ease;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+::selection {
+  background: rgb(var(--tone-2-rgb) / 0.22);
+  color: var(--text-strong);
+}

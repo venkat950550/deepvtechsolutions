@@ -226,7 +226,7 @@ export const engagementTags = [
 export const testimonials = [
   {
     quote:
-      'DeepVtech brought clarity to both our product direction and delivery plan. The result was sharper, faster, and far more scalable.',
+      'DeepVTech brought clarity to both our product direction and delivery plan. The result was sharper, faster, and far more scalable.',
     role: 'Product & Technology Leader',
   },
   {
@@ -236,7 +236,7 @@ export const testimonials = [
   },
   {
     quote:
-      'We needed strong frontend execution with better architecture. DeepVtech helped clean things up without slowing the business down.',
+      'We needed strong frontend execution with better architecture. DeepVTech helped clean things up without slowing the business down.',
     role: 'Enterprise Program Sponsor',
   },
 ];

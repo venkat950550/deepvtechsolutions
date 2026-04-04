@@ -63,28 +63,28 @@ function HorizontalCarouselSection({
   };
 
   return (
-    <div className="rounded-[36px] border border-slate-200/80 bg-white shadow-[0_24px_72px_-42px_rgba(15,23,42,0.16)]">
-      <div className="border-b border-slate-200/80 px-6 py-7 sm:px-8 sm:py-8 lg:px-10">
+    <div className="theme-panel rounded-[36px]">
+      <div className="theme-panel__header px-6 py-7 sm:px-8 sm:py-8 lg:px-10">
         <div className="max-w-3xl text-left">
           {eyebrow ? (
-            <div className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-sky-700">
+            <div className="theme-accent-text text-[0.68rem] font-semibold uppercase tracking-[0.22em]">
               {eyebrow}
             </div>
           ) : null}
           {title ? (
-            <h3 className={`${eyebrow ? 'mt-4' : ''} text-2xl font-semibold tracking-tight text-slate-950 sm:text-[2rem]`}>
+            <h3 className={`${eyebrow ? 'mt-4' : ''} theme-title text-2xl font-semibold tracking-tight sm:text-[2rem]`}>
               {title}
             </h3>
           ) : null}
           {copy ? (
-            <p className={`${eyebrow || title ? 'mt-4' : ''} text-sm leading-7 text-slate-600 sm:text-base`}>
+            <p className={`${eyebrow || title ? 'mt-4' : ''} theme-copy text-sm leading-7 sm:text-base`}>
               {copy}
             </p>
           ) : null}
         </div>
       </div>
 
-      <div className={`${tone === 'tinted' ? 'bg-[linear-gradient(180deg,#f8fbff_0%,#f2fbff_56%,#fbfff5_100%)]' : 'bg-white'} p-6 sm:p-8 lg:p-10`}>
+      <div className={`${tone === 'tinted' ? 'theme-panel__body--tinted' : 'theme-panel__body'} p-6 sm:p-8 lg:p-10`}>
         <div className={`${stageClassName} overflow-hidden`}>
           <div
             className="flex h-full transition-transform duration-500 ease-out"
@@ -121,7 +121,7 @@ function HorizontalCarouselSection({
               type="button"
               onClick={goToPrevious}
               aria-label={`Previous ${navigationLabel} slide`}
-              className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition hover:border-sky-200 hover:text-sky-700"
+              className="theme-icon-button flex h-10 w-10 items-center justify-center rounded-full"
             >
               <Icon name="arrow-right" className="h-4 w-4 rotate-180" />
             </button>
@@ -129,7 +129,7 @@ function HorizontalCarouselSection({
               type="button"
               onClick={goToNext}
               aria-label={`Next ${navigationLabel} slide`}
-              className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-sky-500 via-cyan-500 to-lime-500 text-white shadow-md shadow-sky-500/20 transition hover:-translate-y-0.5"
+              className="theme-icon-button--accent flex h-10 w-10 items-center justify-center rounded-full"
             >
               <Icon name="arrow-right" className="h-4 w-4" />
             </button>
@@ -183,7 +183,7 @@ export default function ServicesSection({ featuredOffers = [] }) {
     return (
       <article
         key={`${item.cardType}-${item.title}`}
-        className="group relative flex h-full flex-col overflow-hidden rounded-[28px] border border-slate-200/80 bg-white p-5 text-left shadow-[0_20px_60px_-36px_rgba(15,23,42,0.16)] transition duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-[0_28px_70px_-38px_rgba(14,165,233,0.18)]"
+        className="theme-card theme-card--interactive group relative flex h-full flex-col overflow-hidden rounded-[28px] p-5 text-left transition duration-300 hover:-translate-y-1"
         style={{
           width: SERVICE_CARD_WIDTH,
           minWidth: SERVICE_CARD_WIDTH,
@@ -193,29 +193,29 @@ export default function ServicesSection({ featuredOffers = [] }) {
           maxHeight: SERVICE_CARD_HEIGHT,
         }}
       >
-        <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-sky-500/90 via-cyan-500/90 to-lime-500/90" />
+        <div className="theme-gradient-bar absolute inset-x-0 top-0 h-1" />
 
         <div className="flex flex-col">
-          <h3 className="text-center text-lg font-semibold leading-6 tracking-tight text-slate-950" style={titleClampStyle}>
+          <h3 className="theme-title text-center text-lg font-semibold leading-6 tracking-tight" style={titleClampStyle}>
             {item.title}
           </h3>
 
           <div
             className={`mx-auto mt-5 flex h-20 w-20 shrink-0 items-center justify-center rounded-[24px] ${
               item.iconVariant === 'solid'
-                ? 'bg-gradient-to-br from-sky-500 via-cyan-500 to-lime-500 text-white shadow-lg shadow-sky-500/20'
-                : 'bg-[linear-gradient(135deg,rgba(14,165,233,0.12),rgba(34,211,238,0.10),rgba(132,204,22,0.14))] text-sky-700'
+                ? 'theme-icon-badge'
+                : 'theme-icon-badge--soft'
             }`}
           >
             <Icon name={item.icon} className="h-9 w-9" />
           </div>
         </div>
 
-        <div className="mt-6 flex-1 rounded-[22px] border border-slate-100 bg-slate-50/80 p-4">
+        <div className="theme-subcard mt-6 flex-1 rounded-[22px] p-4">
           <div className="space-y-3">
             {points.map((point) => (
-              <div key={point} className="flex items-start gap-3 text-sm leading-5 text-slate-700">
-                <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-gradient-to-r from-sky-500 via-cyan-500 to-lime-500" />
+              <div key={point} className="theme-copy flex items-start gap-3 text-sm leading-5">
+                <span className="theme-inline-accent-line mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full" />
                 <span>{point}</span>
               </div>
             ))}
@@ -223,7 +223,7 @@ export default function ServicesSection({ featuredOffers = [] }) {
         </div>
 
         <div className="mt-4 flex justify-center">
-          <div className="inline-flex rounded-full border border-sky-100 bg-sky-50 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-sky-700">
+          <div className="theme-chip inline-flex rounded-full px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em]">
             {item.cardType}
           </div>
         </div>
@@ -232,13 +232,13 @@ export default function ServicesSection({ featuredOffers = [] }) {
   };
 
   return (
-    <ThemeSection subtle className="border-y border-slate-200/70">
+    <ThemeSection subtle className="theme-section-frame">
       <div className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <Reveal className="flex justify-center">
           <SectionHeading
             eyebrow="Solutions & Offers"
             title="Service lines and delivery capabilities built as one connected offering"
-            copy="DeepVtech supports strategy, product delivery, AI implementation, and engineering execution through a single integrated service model rather than disconnected offerings."
+            copy="DeepVTech supports strategy, product delivery, AI implementation, and engineering execution through a single integrated service model rather than disconnected offerings."
             align="center"
           />
         </Reveal>
@@ -248,7 +248,7 @@ export default function ServicesSection({ featuredOffers = [] }) {
             <HorizontalCarouselSection
               eyebrow=""
               title=""
-              copy="Browse the core services DeepVtech leads with alongside the supporting capabilities that extend delivery, modernization, quality, and advisory support."
+              copy="Browse the core services DeepVTech leads with alongside the supporting capabilities that extend delivery, modernization, quality, and advisory support."
               items={combinedCards}
               tone="tinted"
               stageClassName="h-[400px]"

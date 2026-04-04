@@ -172,7 +172,7 @@ export default function ContactHeroSection() {
       return;
     }
 
-    const subject = `DeepVtech inquiry: ${formState.service}`;
+    const subject = `DeepVTech inquiry: ${formState.service}`;
     const body = [
       `Name: ${formState.name}`,
       `Company: ${formState.company || 'Not provided'}`,
@@ -193,43 +193,43 @@ export default function ContactHeroSection() {
         <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8 lg:py-16">
           <Reveal>
             <div className="mx-auto max-w-4xl text-center">
-              <div className="inline-flex items-center gap-2 rounded-full border border-sky-100 bg-sky-50/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em] text-sky-700">
+              <div className="theme-chip inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.22em]">
                 <Icon name="sparkles" className="h-3.5 w-3.5" />
                 Start the Conversation
               </div>
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">
+              <h2 className="theme-title mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
                 Let's talk about your next product, platform, or AI initiative.
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-base leading-8 text-slate-600">
+              <p className="theme-copy mx-auto mt-4 max-w-2xl text-base leading-8">
                 Use this form to start a focused conversation about consulting, software delivery, AI implementation, workflow modernization, or engineering improvement.
               </p>
             </div>
           </Reveal>
 
           <Reveal delay={90}>
-            <form noValidate onSubmit={handleSubmit} className="mx-auto mt-8 max-w-4xl rounded-[36px] border border-sky-100 bg-white/90 p-6 shadow-sm backdrop-blur sm:p-8">
+            <form noValidate onSubmit={handleSubmit} className="theme-form-shell mx-auto mt-8 max-w-4xl rounded-[36px] p-6 sm:p-8">
               <div className="grid gap-5">
                 <div className="text-center">
-                  <h3 className="text-2xl font-semibold tracking-tight text-slate-950">Send an inquiry</h3>
-                  <p className="mt-2 text-sm leading-7 text-slate-600">Share a few details and we'll shape the right solution path for your business.</p>
+                  <h3 className="theme-title text-2xl font-semibold tracking-tight">Send an inquiry</h3>
+                  <p className="theme-copy mt-2 text-sm leading-7">Share a few details and we'll shape the right solution path for your business.</p>
                 </div>
                 {Object.keys(errors).length > 0 ? (
-                  <div className="rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm leading-6 text-rose-900">
+                  <div className="theme-alert theme-alert--error rounded-2xl px-4 py-3 text-sm leading-6">
                     Please fix the highlighted fields before requesting a consultation.
                   </div>
                 ) : null}
                 {status === 'success' ? (
-                  <div className="rounded-2xl border border-emerald-200 bg-emerald-50 px-4 py-3 text-sm leading-6 text-emerald-900">
+                  <div className="theme-alert theme-alert--success rounded-2xl px-4 py-3 text-sm leading-6">
                     {successMessage}
                   </div>
                 ) : null}
                 {status === 'missing-config' ? (
-                  <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm leading-6 text-amber-900">
+                  <div className="theme-alert theme-alert--warning rounded-2xl px-4 py-3 text-sm leading-6">
                     Email delivery is not configured yet. Set <span className="font-semibold">VITE_CONTACT_EMAIL</span> to <span className="font-semibold">{fallbackContactEmail}</span> and restart the dev server.
                   </div>
                 ) : null}
                 <div className="grid gap-5 sm:grid-cols-2">
-                  <label className="grid gap-2 text-left text-sm font-medium text-slate-700">
+                  <label className="theme-field-label grid gap-2 text-left text-sm font-medium">
                     Name
                     <input
                       type="text"
@@ -239,10 +239,10 @@ export default function ContactHeroSection() {
                       onBlur={handleBlur}
                       aria-invalid={Boolean(errors.name)}
                       aria-describedby={errors.name ? 'contact-name-error' : undefined}
-                      className={`rounded-2xl border px-4 py-3 outline-none transition ${
+                      className={`rounded-2xl px-4 py-3 transition ${
                         errors.name
-                          ? 'border-rose-300 bg-rose-50 focus:border-rose-400 focus:bg-white'
-                          : 'border-slate-200 bg-slate-50 focus:border-sky-400 focus:bg-white'
+                          ? 'theme-form-field theme-form-field--error'
+                          : 'theme-form-field'
                       }`}
                       placeholder="Your name"
                     />
@@ -252,7 +252,7 @@ export default function ContactHeroSection() {
                       </span>
                     ) : null}
                   </label>
-                  <label className="grid gap-2 text-left text-sm font-medium text-slate-700">
+                  <label className="theme-field-label grid gap-2 text-left text-sm font-medium">
                     Company
                     <input
                       type="text"
@@ -262,10 +262,10 @@ export default function ContactHeroSection() {
                       onBlur={handleBlur}
                       aria-invalid={Boolean(errors.company)}
                       aria-describedby={errors.company ? 'contact-company-error' : undefined}
-                      className={`rounded-2xl border px-4 py-3 outline-none transition ${
+                      className={`rounded-2xl px-4 py-3 transition ${
                         errors.company
-                          ? 'border-rose-300 bg-rose-50 focus:border-rose-400 focus:bg-white'
-                          : 'border-slate-200 bg-slate-50 focus:border-sky-400 focus:bg-white'
+                          ? 'theme-form-field theme-form-field--error'
+                          : 'theme-form-field'
                       }`}
                       placeholder="Company name"
                     />
@@ -277,7 +277,7 @@ export default function ContactHeroSection() {
                   </label>
                 </div>
                 <div className="grid gap-5 sm:grid-cols-2">
-                  <label className="grid gap-2 text-left text-sm font-medium text-slate-700">
+                  <label className="theme-field-label grid gap-2 text-left text-sm font-medium">
                     Email
                     <input
                       type="email"
@@ -287,10 +287,10 @@ export default function ContactHeroSection() {
                       onBlur={handleBlur}
                       aria-invalid={Boolean(errors.email)}
                       aria-describedby={errors.email ? 'contact-email-error' : undefined}
-                      className={`rounded-2xl border px-4 py-3 outline-none transition ${
+                      className={`rounded-2xl px-4 py-3 transition ${
                         errors.email
-                          ? 'border-rose-300 bg-rose-50 focus:border-rose-400 focus:bg-white'
-                          : 'border-slate-200 bg-slate-50 focus:border-sky-400 focus:bg-white'
+                          ? 'theme-form-field theme-form-field--error'
+                          : 'theme-form-field'
                       }`}
                       placeholder="name@company.com"
                     />
@@ -300,7 +300,7 @@ export default function ContactHeroSection() {
                       </span>
                     ) : null}
                   </label>
-                  <label className="grid gap-2 text-left text-sm font-medium text-slate-700">
+                  <label className="theme-field-label grid gap-2 text-left text-sm font-medium">
                     Service needed
                     <select
                       name="service"
@@ -309,10 +309,10 @@ export default function ContactHeroSection() {
                       onBlur={handleBlur}
                       aria-invalid={Boolean(errors.service)}
                       aria-describedby={errors.service ? 'contact-service-error' : undefined}
-                      className={`rounded-2xl border px-4 py-3 outline-none transition ${
+                      className={`rounded-2xl px-4 py-3 transition ${
                         errors.service
-                          ? 'border-rose-300 bg-rose-50 focus:border-rose-400 focus:bg-white'
-                          : 'border-slate-200 bg-slate-50 focus:border-sky-400 focus:bg-white'
+                          ? 'theme-form-field theme-form-field--error'
+                          : 'theme-form-field'
                       }`}
                     >
                       {serviceOptions.map((option) => (
@@ -326,7 +326,7 @@ export default function ContactHeroSection() {
                     ) : null}
                   </label>
                 </div>
-                <label className="grid gap-2 text-left text-sm font-medium text-slate-700">
+                <label className="theme-field-label grid gap-2 text-left text-sm font-medium">
                   Project details
                   <textarea
                     name="details"
@@ -336,10 +336,10 @@ export default function ContactHeroSection() {
                     rows={6}
                     aria-invalid={Boolean(errors.details)}
                     aria-describedby={errors.details ? 'contact-details-error' : undefined}
-                    className={`rounded-3xl border px-4 py-3 outline-none transition ${
+                    className={`rounded-3xl px-4 py-3 transition ${
                       errors.details
-                        ? 'border-rose-300 bg-rose-50 focus:border-rose-400 focus:bg-white'
-                        : 'border-slate-200 bg-slate-50 focus:border-sky-400 focus:bg-white'
+                        ? 'theme-form-field theme-form-field--error'
+                        : 'theme-form-field'
                     }`}
                     placeholder="Tell us about your project, challenge, or AI idea..."
                   />
@@ -347,9 +347,9 @@ export default function ContactHeroSection() {
                     <span id="contact-details-error" className="text-xs font-medium leading-5 text-rose-700">
                       {errors.details}
                     </span>
-                  ) : null}
+                    ) : null}
                 </label>
-                <button type="submit" className="relative mx-auto inline-flex min-w-[17rem] items-center justify-center rounded-full bg-gradient-to-r from-sky-500 via-cyan-500 to-lime-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 transition hover:-translate-y-0.5">
+                <button type="submit" className="theme-primary-button relative mx-auto inline-flex min-w-[17rem] items-center justify-center rounded-full px-6 py-3 text-sm font-semibold">
                   <span className="text-center">Request a Consultation</span>
                   <span className="absolute right-2 flex h-8 w-8 items-center justify-center rounded-full bg-white/15 ring-1 ring-inset ring-white/20">
                     <Icon name="arrow-right" className="h-4 w-4" />
@@ -369,22 +369,22 @@ export default function ContactHeroSection() {
                 <a
                   href={item.href}
                   {...(item.external ? { target: '_blank', rel: 'noreferrer' } : {})}
-                  className="group relative flex h-full min-h-[18rem] flex-col overflow-hidden rounded-[30px] border border-sky-100 bg-white/92 p-6 text-left shadow-[0_20px_60px_-40px_rgba(14,165,233,0.26)] backdrop-blur transition duration-300 hover:-translate-y-1 hover:border-sky-200 hover:shadow-[0_28px_72px_-40px_rgba(14,165,233,0.34)]"
+                  className="theme-card theme-card--interactive group relative flex h-full min-h-[18rem] flex-col overflow-hidden rounded-[30px] p-6 text-left transition duration-300 hover:-translate-y-1"
                 >
-                  <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-sky-500/90 via-cyan-500/90 to-lime-500/90" />
+                  <div className="theme-gradient-bar absolute inset-x-0 top-0 h-1" />
 
                   <div className="flex items-start justify-between gap-4">
-                    <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-sky-500 via-cyan-500 to-lime-500 text-white shadow-lg shadow-sky-500/20">
+                    <div className="theme-icon-badge flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl">
                       <Icon name={item.icon} className="h-5 w-5" />
                     </div>
 
-                    <div className="inline-flex rounded-full border border-sky-100 bg-sky-50 px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-sky-700">
+                    <div className="theme-chip inline-flex rounded-full px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.18em]">
                       {item.action}
                     </div>
                   </div>
 
                   <div className="mt-6 flex flex-1 flex-col">
-                    <h3 className="text-xl font-semibold tracking-tight text-slate-950">{item.title}</h3>
+                    <h3 className="theme-title text-xl font-semibold tracking-tight">{item.title}</h3>
 
                     <div className="mt-4 space-y-2">
                       {item.lines.map((line, lineIndex) => (
@@ -392,8 +392,8 @@ export default function ContactHeroSection() {
                           key={line}
                           className={
                             lineIndex === 0
-                              ? 'text-base font-medium leading-7 text-slate-900'
-                              : 'text-sm leading-6 text-slate-600'
+                              ? 'theme-title text-base font-medium leading-7'
+                              : 'theme-copy text-sm leading-6'
                           }
                         >
                           {line}
@@ -401,13 +401,13 @@ export default function ContactHeroSection() {
                       ))}
                     </div>
 
-                      <div className="mt-auto pt-6">
-                        <div className="relative inline-flex w-full items-center justify-center rounded-2xl border border-sky-200/80 bg-white px-4 py-2.5 text-sm font-semibold text-sky-700 shadow-[0_14px_30px_-20px_rgba(14,165,233,0.45)] transition group-hover:-translate-y-0.5 group-hover:border-sky-300 group-hover:bg-sky-50/80 group-hover:text-sky-800">
-                          <span className="text-center">{item.action}</span>
-                          <span className="absolute right-2.5 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-r from-sky-500 via-cyan-500 to-lime-500 text-white shadow-sm shadow-sky-500/20">
-                            <Icon name="arrow-right" className="h-3.5 w-3.5" />
-                          </span>
-                        </div>
+                    <div className="mt-auto pt-6">
+                      <div className="theme-action-link relative inline-flex w-full items-center justify-center rounded-2xl px-4 py-2.5 text-sm font-semibold">
+                        <span className="text-center">{item.action}</span>
+                        <span className="theme-action-link__icon absolute right-2.5 flex h-7 w-7 items-center justify-center rounded-full">
+                          <Icon name="arrow-right" className="h-3.5 w-3.5" />
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </a>
