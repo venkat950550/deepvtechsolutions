@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import BrandMark from './BrandMark';
 import Icon from '../common/Icon';
+import ColorModeToggle from '../common/ColorModeToggle';
 import { navItems } from '../../data/siteData';
 import { cx } from '../../utils/cx';
 
@@ -19,7 +20,7 @@ export default function SiteHeader() {
           <BrandMark />
         </NavLink>
 
-        <div className="hidden items-center gap-3 md:flex">
+        <div className="hidden min-w-0 flex-1 items-center justify-center gap-3 px-6 md:flex">
           {navItems.map((item) => (
             <NavLink
               key={item.id}
@@ -42,15 +43,22 @@ export default function SiteHeader() {
           </NavLink>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setMenuOpen((value) => !value)}
-          className="theme-ghost-button rounded-full p-2 md:hidden"
-          aria-label="Toggle navigation"
-          aria-expanded={menuOpen}
-        >
-          {menuOpen ? <Icon name="x" className="h-5 w-5" /> : <Icon name="menu" className="h-5 w-5" />}
-        </button>
+        <div className="hidden shrink-0 items-center justify-end md:flex">
+          <ColorModeToggle />
+        </div>
+
+        <div className="flex items-center gap-2 md:hidden">
+          <ColorModeToggle />
+          <button
+            type="button"
+            onClick={() => setMenuOpen((value) => !value)}
+            className="theme-ghost-button rounded-full p-2"
+            aria-label="Toggle navigation"
+            aria-expanded={menuOpen}
+          >
+            {menuOpen ? <Icon name="x" className="h-5 w-5" /> : <Icon name="menu" className="h-5 w-5" />}
+          </button>
+        </div>
       </div>
 
       {menuOpen && (

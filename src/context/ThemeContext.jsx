@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 const STORAGE_KEY = 'deepvtech-theme';
+const COLOR_MODE_KEY = 'deepvtech-color-mode';
 
 export const themeOptions = [
   { id: 'aurora', label: 'Aurora', swatch: 'aurora', colorScheme: 'light' },
@@ -20,6 +21,13 @@ function getInitialTheme() {
     return themeOptions[0].id;
   }
 
+  const searchParams = new URLSearchParams(window.location.search);
+  const queryTheme = searchParams.get('theme');
+
+  if (themeOptions.some((option) => option.id === queryTheme)) {
+    return queryTheme;
+  }
+
   const storedTheme = window.localStorage.getItem(STORAGE_KEY);
 
   if (themeOptions.some((option) => option.id === storedTheme)) {
@@ -29,23 +37,53 @@ function getInitialTheme() {
   return themeOptions[0].id;
 }
 
+function getInitialColorMode() {
+  if (typeof window === 'undefined') {
+    return 'light';
+  }
+
+  const searchParams = new URLSearchParams(window.location.search);
+  const queryMode = searchParams.get('mode');
+
+  if (queryMode === 'light' || queryMode === 'dark') {
+    return queryMode;
+  }
+
+  const storedMode = window.localStorage.getItem(COLOR_MODE_KEY);
+
+  if (storedMode === 'light' || storedMode === 'dark') {
+    return storedMode;
+  }
+
+  if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) {
+    return 'dark';
+  }
+
+  return 'light';
+}
+
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(getInitialTheme);
-  const currentTheme = themeOptions.find((option) => option.id === theme) ?? themeOptions[0];
+  const [colorMode, setColorMode] = useState(getInitialColorMode);
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
-    document.documentElement.style.colorScheme = currentTheme.colorScheme;
+    document.documentElement.dataset.colorMode = colorMode;
+    document.documentElement.style.colorScheme = colorMode;
     window.localStorage.setItem(STORAGE_KEY, theme);
-  }, [currentTheme.colorScheme, theme]);
+    window.localStorage.setItem(COLOR_MODE_KEY, colorMode);
+  }, [colorMode, theme]);
 
   const value = useMemo(
     () => ({
       theme,
       setTheme,
+      colorMode,
+      setColorMode,
+      toggleColorMode: () => setColorMode((value) => (value === 'light' ? 'dark' : 'light')),
       themeOptions,
     }),
-    [theme]
+    [colorMode, theme]
   );
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;
