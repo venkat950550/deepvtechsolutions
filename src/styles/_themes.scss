@@ -1,46 +1,6 @@
 @use 'sass:map';
 
 $themes: (
-  aurora: (
-    color-scheme: light,
-    page-bg: linear-gradient(180deg, #ffffff 0%, #f8fcff 45%, #f7fee7 100%),
-    section-bg: linear-gradient(180deg, #f8fbff 0%, #f4fbff 54%, #fbfff5 100%),
-    section-bg-subtle: linear-gradient(180deg, #ffffff 0%, #fbfdff 58%, #f9fdf3 100%),
-    hero-bg: linear-gradient(180deg, #f7fbff 0%, #f2fbff 55%, #fbfff5 100%),
-    footer-bg: linear-gradient(135deg, #ffffff 0%, #f0f9ff 58%, #f7fee7 100%),
-    surface-header: rgba(255, 255, 255, 0.8),
-    surface-card: rgba(255, 255, 255, 0.92),
-    surface-glass: rgba(255, 255, 255, 0.76),
-    surface-muted: rgba(248, 250, 252, 0.84),
-    surface-chip: rgba(239, 249, 255, 0.85),
-    surface-chip-strong: linear-gradient(135deg, rgba(255, 255, 255, 0.94), rgba(240, 249, 255, 0.86)),
-    surface-input: rgba(248, 250, 252, 0.92),
-    text-base: #0f172a,
-    text-strong: #020617,
-    text-muted: #475569,
-    text-soft: #64748b,
-    text-inverse: #f8fafc,
-    border-rgb: 148 163 184,
-    border-accent-rgb: 125 211 252,
-    shadow-rgb: 14 165 233,
-    tone-1-rgb: 14 165 233,
-    tone-2-rgb: 6 182 212,
-    tone-3-rgb: 132 204 22,
-    accent-gradient: linear-gradient(135deg, rgb(14 165 233), rgb(6 182 212) 55%, rgb(132 204 22)),
-    accent-gradient-soft: linear-gradient(135deg, rgba(14, 165, 233, 0.12), rgba(6, 182, 212, 0.1) 55%, rgba(132, 204, 22, 0.14)),
-    hero-overlay: 'radial-gradient(circle at 16% 18%, rgba(14, 165, 233, 0.05), transparent 18%), radial-gradient(circle at 82% 22%, rgba(6, 182, 212, 0.05), transparent 16%), radial-gradient(circle at 76% 82%, rgba(132, 204, 22, 0.04), transparent 16%)',
-    hero-grid-major: rgba(14, 165, 233, 0.07),
-    hero-grid-minor: rgba(14, 165, 233, 0.05),
-    hero-line-1: rgb(14 165 233 / 0.18),
-    hero-line-2: rgb(6 182 212 / 0.18),
-    hero-line-3: rgb(132 204 22 / 0.16),
-    hero-line-4: rgb(14 165 233 / 0.12),
-    hero-spot-1: rgb(125 211 252 / 0.16),
-    hero-spot-2: rgb(103 232 249 / 0.14),
-    hero-spot-3: rgb(190 242 100 / 0.14),
-    section-overlay: 'radial-gradient(circle at 16% 18%, rgba(14, 165, 233, 0.08), transparent 24%), radial-gradient(circle at 84% 20%, rgba(34, 211, 238, 0.07), transparent 22%), radial-gradient(circle at 76% 84%, rgba(132, 204, 22, 0.06), transparent 24%)',
-    section-overlay-subtle: 'radial-gradient(circle at 18% 16%, rgba(14, 165, 233, 0.05), transparent 26%), radial-gradient(circle at 82% 84%, rgba(132, 204, 22, 0.05), transparent 22%)'
-  ),
   prism: (
     color-scheme: light,
     page-bg: linear-gradient(180deg, #fbfdff 0%, #eef6ff 24%, #edfaff 52%, #f1fbf7 78%, #fff6eb 100%),
@@ -470,9 +430,8 @@ $color-modes: (
   --section-overlay-subtle: #{map.get($mode, section-overlay-subtle)};
 }
 
-:root,
-html[data-theme='aurora'] {
-  @include emit-theme(map.get($themes, aurora));
+:root {
+  @include emit-theme(map.get($themes, prism));
 }
 
 html[data-theme='ember'] {

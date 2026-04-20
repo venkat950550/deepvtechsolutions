@@ -1,7 +1,6 @@
 import Icon from '../common/Icon';
 import { useLocation } from 'react-router-dom';
 import { contactCards } from '../../data/siteData';
-import ThemeToggle from '../common/ThemeToggle';
 
 export default function SiteFooter() {
   const { pathname } = useLocation();
@@ -37,7 +36,6 @@ export default function SiteFooter() {
           <div className="theme-muted-text text-sm">
             Copyright {new Date().getFullYear()} DeepVTech Solutions LLC. All rights reserved.
           </div>
-          <ThemeToggle variant="footer" />
         </div>
       </div>
     </footer>
