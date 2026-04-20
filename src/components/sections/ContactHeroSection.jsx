@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { contactCards } from '../../data/siteData';
 import ThemeSection from '../common/ThemeSection';
 import Reveal from '../common/Reveal';
@@ -84,21 +84,12 @@ function validateForm(values) {
 }
 
 export default function ContactHeroSection() {
-  const contactEmail = import.meta.env.VITE_CONTACT_EMAIL?.trim() || fallbackContactEmail;
+  const contactEmail = fallbackContactEmail;
+  const submitEndpoint = `https://formsubmit.co/ajax/${contactEmail}`;
   const [formState, setFormState] = useState(defaultForm);
   const [status, setStatus] = useState('idle');
   const [errors, setErrors] = useState({});
   const [touchedFields, setTouchedFields] = useState({});
-
-  const isConfigured = Boolean(contactEmail);
-
-  const successMessage = useMemo(() => {
-    if (!isConfigured) {
-      return 'This form is ready to send by email, but VITE_CONTACT_EMAIL is not configured yet.';
-    }
-
-    return `Your email app should open a draft addressed to ${contactEmail}.`;
-  }, [contactEmail, isConfigured]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -142,7 +133,7 @@ export default function ContactHeroSection() {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     const nextErrors = validateForm(formState);
@@ -167,24 +158,37 @@ export default function ContactHeroSection() {
       return;
     }
 
-    if (!isConfigured) {
-      setStatus('missing-config');
-      return;
+    setStatus('sending');
+    try {
+      const response = await fetch(submitEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: `DeepVTech inquiry: ${formState.service}`,
+          _captcha: 'false',
+          _replyto: formState.email,
+          name: formState.name,
+          company: formState.company,
+          email: formState.email,
+          service: formState.service,
+          details: formState.details,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to send');
+      }
+
+      setStatus('success');
+      setFormState(defaultForm);
+      setErrors({});
+      setTouchedFields({});
+    } catch (_error) {
+      setStatus('error');
     }
-
-    const subject = `DeepVTech inquiry: ${formState.service}`;
-    const body = [
-      `Name: ${formState.name}`,
-      `Company: ${formState.company || 'Not provided'}`,
-      `Email: ${formState.email}`,
-      `Service needed: ${formState.service}`,
-      '',
-      'Project details:',
-      formState.details,
-    ].join('\n');
-
-    window.location.href = `mailto:${encodeURIComponent(contactEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setStatus('success');
   };
 
   return (
@@ -220,12 +224,12 @@ export default function ContactHeroSection() {
                 ) : null}
                 {status === 'success' ? (
                   <div className="theme-alert theme-alert--success rounded-2xl px-4 py-3 text-sm leading-6">
-                    {successMessage}
+                    Inquiry sent successfully to {contactEmail}.
                   </div>
                 ) : null}
-                {status === 'missing-config' ? (
-                  <div className="theme-alert theme-alert--warning rounded-2xl px-4 py-3 text-sm leading-6">
-                    Email delivery is not configured yet. Set <span className="font-semibold">VITE_CONTACT_EMAIL</span> to <span className="font-semibold">{fallbackContactEmail}</span> and restart the dev server.
+                {status === 'error' ? (
+                  <div className="theme-alert theme-alert--error rounded-2xl px-4 py-3 text-sm leading-6">
+                    We could not send your inquiry right now. Please try again.
                   </div>
                 ) : null}
                 <div className="grid gap-5 sm:grid-cols-2">
@@ -349,8 +353,12 @@ export default function ContactHeroSection() {
                     </span>
                     ) : null}
                 </label>
-                <button type="submit" className="theme-primary-button relative mx-auto inline-flex min-w-[17rem] items-center justify-center rounded-full px-6 py-3 text-sm font-semibold">
-                  <span className="text-center">Request a Consultation</span>
+                <button
+                  type="submit"
+                  disabled={status === 'sending'}
+                  className="theme-primary-button relative mx-auto inline-flex min-w-[17rem] items-center justify-center rounded-full px-6 py-3 text-sm font-semibold disabled:cursor-not-allowed disabled:opacity-70"
+                >
+                  <span className="text-center">{status === 'sending' ? 'Sending...' : 'Request a Consultation'}</span>
                   <span className="absolute right-2 flex h-8 w-8 items-center justify-center rounded-full bg-white/15 ring-1 ring-inset ring-white/20">
                     <Icon name="arrow-right" className="h-4 w-4" />
                   </span>
