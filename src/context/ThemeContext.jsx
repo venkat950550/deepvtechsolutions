@@ -11,6 +11,7 @@ function getInitialTheme() {
   return DEFAULT_THEME;
 }
 
+
 function getInitialColorMode() {
   if (typeof window === 'undefined') {
     return 'light';
